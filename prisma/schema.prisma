@@ -8,17 +8,47 @@ generator client {
 }
 
 model Company {
-
+  id             Int @id @default(autoincrement())
+  name           String
+  shortName      String
+  businessEntity String
+  type           String
+  status         String
+  contactId      Int
+  contact        Contact @relation(fields: [contactId], references: [id])
+  contractId     Int
+  contract       Contract @relation(fields: [contractId], references: [id])
+  photo          Photo?
 }
 
 model Photo {
-
+  id        Int @id @default(autoincrement())
+  name      String 
+  filepath  String
+  thumbpath String
+  companyId Int
+  company   Company @relation(fields: [companyId], references: [id])
 }
 
 model Contract {
+  id        Int @id @default(autoincrement())
+  company   Company?
+  issueDate String
+}
 
+model Contact {
+  id         Int @id @default(autoincrement())
+  lastname   String
+  firstname  String
+  patronymic String
+  phone      String
+  email      String
+  companies  Company[]
 }
 
 model User {
-  
+  id           Int @id @default(autoincrement())
+  name         String
+  password     String
+  refreshToken String
 }
