@@ -1,0 +1,1 @@
+export { imagesRouter } from './images.router.js';

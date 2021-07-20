@@ -6,6 +6,11 @@ import httpContext from 'express-http-context';
 import marked from 'marked';
 import dotenv from 'dotenv'; 
 import { router } from './main/router/index.js';
+import cookieParser from 'cookie-parser';
+import { exeptionMiddleware } from './lib/exeption/index.js';
+
+import { swaggerRouter, swaggerDocs } from './main/swagger/index.js';
+import swaggerUi from 'swagger-ui-express';
 
 // const cron = require('node-cron');
 // const cors = require('cors');
@@ -23,24 +28,25 @@ import { router } from './main/router/index.js';
 // const contactsRouter = require('./routes/contacts.routes');
 
 dotenv.config();
-const app = express();
+const app = express()
+  .use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs))
+  .use(httpContext.middleware)
+  .use((req, res, next) => {
+    httpContext.ns.bindEmitter(req);
+    httpContext.ns.bindEmitter(res);
+    httpContext.set('method', req?.method);
+    httpContext.set('url', req?.url);
+    next();
+  })
+  .use(cors())
+  .use(express.json())
+  .use(cookieParser())
+  .use(router)
+  // ...
 
-app.use(httpContext.middleware);
-app.use((req, res, next) => {
-  httpContext.ns.bindEmitter(req);
-  httpContext.ns.bindEmitter(res);
-  httpContext.set('method', req?.method);
-  httpContext.set('url', req?.url);
-  next();
-});
-
-app.use(cors());
-
-app.use(express.json());
-
-// app.use(express.static(`${__dirname}/public`));
-
-app.use(router);
+  .use(exeptionMiddleware); // последняя!
+  
+app.use(express.static(`./public`));
 
 // app.use('/auth', authRouter);
 // app.use('/companies', companiesRouter);

@@ -1,7 +1,7 @@
 version: '3.1'
 
 services:
-  postgress:
+  db:
     image: postgres
     restart: always
     working_dir: /home/node/app
