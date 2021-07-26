@@ -4,7 +4,7 @@ import {
   getUserWithHashPassword
 } from './users.service.js';
 import { 
-  generateTokensPareService, 
+  generateTokensPareService,
   createRefreshTokenService,
   updateRefreshTokenService,
   removeTokenService,
@@ -19,7 +19,7 @@ const logger = initLogger(import.meta.url);
 
 /**
  * 
- * @description POST /api/v1/users/signup
+ * @description POST /users/signup
  */
 export const signUp = async (request, response, next) => {
   logger.info('signup start');

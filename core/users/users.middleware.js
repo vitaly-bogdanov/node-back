@@ -3,11 +3,6 @@ import { check, validationResult } from 'express-validator';
 import { ExeptionApi } from '../../lib/exeption/exeption.api.js';
 
 export const usersSignUpDataValidatorMiddleware = async (request, response, next) => {
-
-  console.log('!!!');
-  console.log(request.body);
-  console.log('!!!');
-
   await check('name')
     .notEmpty()
     .run(request);

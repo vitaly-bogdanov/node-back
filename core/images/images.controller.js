@@ -32,7 +32,7 @@ export const view = async (request, response, next) => {
     const id = +request.params.id;
     const imageData = await getImage(id);
     imageData.file = getFileUrl(request, imageData.file);
-    imageData.thumb = getFileUrl(request, image.thumb);
+    imageData.thumb = getFileUrl(request, imageData.thumb);
     response.status(200).json(imageData);
   } catch (error) {
     next(error);
