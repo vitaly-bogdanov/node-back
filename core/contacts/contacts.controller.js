@@ -6,7 +6,7 @@ const logger = initLogger(import.meta.url);
 
 /**
  * 
- * @description GET /api/v1/contacts
+ * @description GET /contacts
  */
 export const index = async (request, response, next) => {
   logger.info('get contacts');
@@ -20,7 +20,7 @@ export const index = async (request, response, next) => {
 
 /**
  * 
- * @description GET /api/v1/contacts/:id
+ * @description GET /contacts/:id
  */
 export const view = async (request, response, next) => {
   logger.info('get contact');
@@ -35,7 +35,7 @@ export const view = async (request, response, next) => {
 
 /**
  * 
- * @description POST /api/v1/contacts
+ * @description POST /contacts
  */
 export const create = async (request, response, next) => {
   logger.info('create contact');
@@ -51,7 +51,7 @@ export const create = async (request, response, next) => {
 
 /**
  * 
- * @description PUT /api/v1/contacts
+ * @description PUT /contacts
  */
 export const update = async (request, response, next) => {
   logger.info('update contact');
@@ -68,7 +68,7 @@ export const update = async (request, response, next) => {
 
 /**
  * 
- * @description DELETE /api/v1/contacts
+ * @description DELETE /contacts
  */
 export const destroy = async (request, response, next) => {
   logger.info('delete contact');

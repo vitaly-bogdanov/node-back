@@ -69,7 +69,6 @@ export const companiesRouter = new Router();
  *    consumes:
  *    - "application/json"
  *    produces:
- *    - "application/xml"
  *    - "application/json"
  *    responses:
  *      200:

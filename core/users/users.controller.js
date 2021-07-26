@@ -41,7 +41,7 @@ export const signUp = async (request, response, next) => {
 
 /**
  * 
- * @description POST /api/v1/users/login
+ * @description POST /users/login
  */
 export const logIn = async (request, response, next) => {
   logger.info('login start');
@@ -63,7 +63,7 @@ export const logIn = async (request, response, next) => {
 
 /**
  * 
- * @description DELETE /api/v1/users/logout
+ * @description DELETE /users/logout
  */
 export const logOut = async (request, response, next) => {
   logger.info('logout start');
@@ -79,7 +79,7 @@ export const logOut = async (request, response, next) => {
 
 /**
  * 
- * @description PUT /api/v1/users/refresh-access-token
+ * @description PUT /users/refresh-access-token
  */
 export const refreshAccessToken = async (request, response, next) => {
   logger.info('refresh access token start');

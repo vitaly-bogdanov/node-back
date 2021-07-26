@@ -17,18 +17,24 @@ const logger = initLogger(import.meta.url);
 
 /**
  * 
- * @description GET /api/v1/companies?take=2&step=3&image=get
+ * @description GET /companies?take=2&step=3&image=get
  */
 export const index = async (request, response, next) => {
   logger.info('get companies');
   try {
     const indexCompaniesDto = new IndexCompaniesDto(request.query);
     const companies = await getCompanies({ 
-      where: { type: indexCompaniesDto.type, status: indexCompaniesDto.status, createdAt: { gte: indexCompaniesDto.gte, lt: indexCompaniesDto.lt } }, 
+      where: { 
+        type: indexCompaniesDto.type, 
+        status: indexCompaniesDto.status, 
+        // createdAt: { gte: indexCompaniesDto.gte, lt: indexCompaniesDto.lt } 
+      }, 
       step: indexCompaniesDto.step, 
       take: indexCompaniesDto.take,
-      image: indexCompaniesDto.image,
-      address: indexCompaniesDto.address
+      include: { 
+        image: indexCompaniesDto.image,
+        address: indexCompaniesDto.address 
+      }
     });
     response.status(200).json(companies);
   } catch(error) {
@@ -38,7 +44,7 @@ export const index = async (request, response, next) => {
 
 /**
  * 
- * @description GET /api/v1/companies/:id
+ * @description GET /companies/:id
  */
 export const view = async (request, response, next) => {
   logger.info(`get company by id`);
@@ -53,7 +59,7 @@ export const view = async (request, response, next) => {
 
 /**
  * 
- * @description POST /api/v1/companies
+ * @description POST /companies
  */
 export const create = async (request, response, next) => {
   logger.info('create company');
@@ -69,7 +75,7 @@ export const create = async (request, response, next) => {
 
 /**
  * 
- * @description PUT /api/v1/companies
+ * @description PUT /companies
  */
 export const update = async (request, response, next) => {
   logger.info('update company');
@@ -86,7 +92,7 @@ export const update = async (request, response, next) => {
 
 /**
  * 
- * @description DELETE /api/v1/companies
+ * @description DELETE /companies
  */
 export const destroy = async (request, response, next) => {
   logger.info(`delete company`);

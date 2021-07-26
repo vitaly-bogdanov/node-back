@@ -5,10 +5,10 @@ const logger = initLogger(import.meta.url);
 
 /**
  * 
- * @description GET /api/v1/images
+ * @description GET /images
  */
 export const index = async (request, response, next) => {
-  logger.info('GET /api/v1/images');
+  logger.info('GET /images');
   try {
     const imagesData = await getImages();
     const images = imagesData.map(imageData => {
@@ -24,10 +24,10 @@ export const index = async (request, response, next) => {
 
 /**
  * 
- * @description GET /api/v1/images/:id
+ * @description GET /images/:id
  */
 export const view = async (request, response, next) => {
-  logger.info('GET /api/v1/images/:id');
+  logger.info('GET /images/:id');
   try {
     const id = +request.params.id;
     const imageData = await getImage(id);
@@ -41,10 +41,10 @@ export const view = async (request, response, next) => {
 
 /**
  * 
- * @description POST /api/v1/images
+ * @description POST /images
  */
 export const create = async (request, response, next) => {
-  logger.info('POST /api/v1/photos');
+  logger.info('POST /photos');
   try {
     logger.info('File upload started');
     const companyId = +request.body.companyId;
@@ -66,10 +66,10 @@ export const create = async (request, response, next) => {
 
 /**
  * 
- * @description DELETE /api/v1/images/:id
+ * @description DELETE /images/:id
  */
 export const destroy = async (request, response, next) => {
-  logger.info('POST /api/v1/photos/:id');
+  logger.info('POST /photos/:id');
   try {
     const id = +request.params.id;
     const imageData = await removeImage(id);
